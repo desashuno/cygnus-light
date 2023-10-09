@@ -1,31 +1,21 @@
 import llm
-from scripts.load_model import *
-from scripts.tts import Tts
+from scripts.get_config import Config
+from scripts.conversation import Conversation
+from scripts.gui import Gui
 
 
-class Main():
+class Main:
     def __init__(self):
-        self.new_instance()
+        self.start_up()
 
-        # tts
-        self.activate_tts = False
-        self.tts_name = "out"
-
-    def new_instance(self):
-        self.tts = Tts(self)
-        self.model = model
-
+    def start_up(self):
+        self.config = Config(self)
+        self.conversation = Conversation(self)
+        self.gui = Gui(self)
+        
 
     def run(self):
-        self.question = "write a enumerated list of 5 names for a dog"
-        #question = input("input: ")
-
-        self.response = model.prompt(self.question)
-
-        if self.activate_tts:
-            self.tts.text_speach(self.response.text())
-        
-        print("Output: " + self.response.text())
+        self.gui()
 
 
 if __name__ == "__main__":
