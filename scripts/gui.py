@@ -1,6 +1,3 @@
-
-
-
 class Gui:
     def __init__(self, main):
         self.main = main
@@ -17,9 +14,17 @@ class Gui:
         print(self.main.config.character_name + " :> " + self.main.config.character_init)
         
         while True:
-            self.user_input =  input("user :> ")
+            self.main.user_input = input("user :> ")
+            self.exceptions()
+
+            # generates the answer
+            self.main.conversation.response()
+            print(self.main.config.character_name + " :> " + self.main.ai_output.text())
+
+    
+    def exceptions(self):
 
             #exits the chat
-            if self.user_input == "system.exit":
+            if self.main.user_input == "system.exit":
                 print("bye ;)")
                 exit()
