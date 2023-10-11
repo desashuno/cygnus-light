@@ -8,23 +8,24 @@ class Gui:
 
 
     def cli_gui(self):
-        print(self.main.config.model + " text gen in cli mode...")
+        print(self.main.config.model_name + " text gen in cli mode...")
         self.main.conversation.new_conversation()
         print("")
         print(self.main.config.character_name + " :> " + self.main.config.character_init)
         
         while True:
-            self.main.user_input = input("user :> ")
+            self.main.conversation.user_input = input("user :> ")
             self.exceptions()
 
             # generates the answer
             self.main.conversation.response()
-            print(self.main.config.character_name + " :> " + self.main.ai_output.text())
+            #print(self.main.config.character_name + " :> " + self.main.ai_output)
+            print(self.main.conversation.ai_output["choices"][0]["text"])
 
     
     def exceptions(self):
 
             #exits the chat
-            if self.main.user_input == "system.exit":
+            if self.main.conversation.user_input == "system.exit":
                 print("bye ;)")
                 exit()

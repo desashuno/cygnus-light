@@ -12,26 +12,56 @@ class Config:
         self.character_name = self.character["name"]
         self.character_description = self.character["description"]
         self.character_init = self.character["init"]
+        self.character_template = self.character["template"]
 
-        # llm settings
+        # model settings
+        self.model_name = self.settings["model"]["name"]
+        self.model_path = self.settings["model"]["model_path"]
+        self.model_max_tokens = self.settings["model"]["max_tokens"]
+        self.model_temperature = self.settings["model"]["temperature"]
+        self.model_top_p = self.settings["model"]["top_p"]
+        self.model_top_k = self.settings["model"]["top_k"]
 
 
         #cygnus-light-configs
 
-        self.model = self.settings["model"]
         self.gui_mode = self.settings["gui_mode"]
+
 
     def get_character(self):
         self.character = {
             "name" : "Cygnus",
-            "description" : "A revolucionary artificial inteligence",
-            "init" :  "Hello, I am Cygnus, and I am here for everithing you want."
+
+            "description" : "Is a local revolutionary AI of the race of Xelkonians, actually it is:  smart, kind, always tries to help",
+            
+            "init" :  "Hello, I am Cygnus, and I am here for everithing you want.",
+            
+            "default_template" : "You are a helpful, \
+            respectful and honest assistant. Always answer as helpfully as possible, \
+            while being safe.  Your answers should not include any harmful, unethical, \
+            racist, sexist, toxic, dangerous, or illegal content. \
+            Please ensure that your responses are socially unbiased and positive in nature. \
+            If a question does not make any sense, or is not factually coherent, \
+            explain why instead of answering something not correct. \
+            If you don't know the answer to a question, please don't share false information.",
+
+            "template" : "You are a helpful, \
+            respectful and honest AI assistant named Cygnus. Always answer as helpfully as possible, \
+            while being safe. \
+            Please ensure that your responses are socially unbiased and positive in nature. \
+            If a question does not make any sense, or is not factually coherent, \
+            explain why instead of answering something not correct. \
+            If you don't know the answer to a question, please don't share false information."
         }
 
 
     def get_json(self):
         self.settings = {
-            "character" : "Cygnus-7B",
-            "model" : "Cygnus-7B",
+            "model" : {"name" : "Cygnus-7B", 
+            "model_path" : "./models/llama-2-7b-chat.Q2_K.gguf",
+            "max_tokens" : 256, 
+            "temperature" : 0.7, 
+            "top_p" : 0.9, 
+            "top_k" : 20},
             "gui_mode" : "cli"
             }
