@@ -24,8 +24,11 @@ class Gui:
 
     
     def exceptions(self):
-
+            keyword="system."
             #exits the chat
-            if self.main.conversation.user_input == "system.exit":
+            if self.main.conversation.user_input == keyword + "exit":
                 print("bye ;)")
                 exit()
+            if self.main.conversation.user_input == keyword + "model":
+                print(self.main.config.model_name)
+                

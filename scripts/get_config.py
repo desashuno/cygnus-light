@@ -1,8 +1,10 @@
+import yaml
+
+
 class Config:
     def __init__(self, main):
         self.main = main
-        self.get_json()
-        self.get_character()
+        self.yaml_config()
         self.config_variables()
 
 
@@ -16,7 +18,7 @@ class Config:
 
         # model settings
         self.model_name = self.settings["model"]["name"]
-        self.model_path = self.settings["model"]["model_path"]
+        self.model_path = self.settings["model"]["path"]
         self.model_max_tokens = self.settings["model"]["max_tokens"]
         self.model_temperature = self.settings["model"]["temperature"]
         self.model_top_p = self.settings["model"]["top_p"]
@@ -28,8 +30,30 @@ class Config:
         self.gui_mode = self.settings["gui_mode"]
 
 
-    def get_character(self):
-        self.character = {
+    def yaml_config(self):
+        # gets the AI configuration
+        try:
+            with open("settings.yaml", "r") as file:
+                self.all_settings = yaml.safe_load(file)
+            
+            self.character = self.all_settings["character"]
+            self.settings = self.all_settings["settings"]
+
+
+        except FileNotFoundError:
+            print("config file not found, using default configuration")
+            
+            self.settings = {
+            "model" : {"name" : "Cygnus-7B", 
+            "path" : "./models/llama-2-7b-chat.Q2_K.gguf",
+            "max_tokens" : 256, 
+            "temperature" : 0.7, 
+            "top_p" : 0.9, 
+            "top_k" : 20},
+            "gui_mode" : "cli"
+            }
+
+            self.character = {
             "name" : "Cygnus",
 
             "description" : "Is a local revolutionary AI of the race of Xelkonians, actually it is:  smart, kind, always tries to help",
@@ -54,14 +78,3 @@ class Config:
             If you don't know the answer to a question, please don't share false information."
         }
 
-
-    def get_json(self):
-        self.settings = {
-            "model" : {"name" : "Cygnus-7B", 
-            "model_path" : "./models/llama-2-7b-chat.Q2_K.gguf",
-            "max_tokens" : 256, 
-            "temperature" : 0.7, 
-            "top_p" : 0.9, 
-            "top_k" : 20},
-            "gui_mode" : "cli"
-            }
