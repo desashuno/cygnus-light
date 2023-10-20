@@ -4,8 +4,12 @@ import yaml
 class Config:
     def __init__(self, main):
         self.main = main
+        self.load_config()
+
+    def load_config(self):
         self.yaml_config()
         self.config_variables()
+
 
 
     def config_variables(self):

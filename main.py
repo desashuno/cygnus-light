@@ -1,6 +1,6 @@
 from scripts.get_config import Config
 from scripts.conversation import Conversation
-from scripts.gui import Gui
+from scripts.gui import Gui_manager
 
 
 class Main:
@@ -10,11 +10,11 @@ class Main:
     def start_up(self):
         self.config = Config(self)
         self.conversation = Conversation(self)
-        self.gui = Gui(self)
+        self.gui_manager = Gui_manager(self)
         
 
     def run(self):
-        self.gui()
+        self.gui_manager()
 
 
 if __name__ == "__main__":
